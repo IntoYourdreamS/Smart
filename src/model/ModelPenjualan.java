@@ -9,5 +9,14 @@ package model;
  * @author YourdreamS
  */
 public class ModelPenjualan {
-    
+    private ModelPenjualanDetail modelPenDet;
+
+    public ModelPenjualanDetail getModelPenDet() {
+        return modelPenDet;
+    }
+
+//    private ModelProduk modelProduk;
+    public void setModelPenDet(ModelPenjualanDetail modelPenDet) {
+        this.modelPenDet = modelPenDet;
+    }
 }
