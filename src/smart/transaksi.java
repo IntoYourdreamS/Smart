@@ -23,8 +23,16 @@ public class transaksi extends javax.swing.JFrame {
     private static int counter = 1;
     public transaksi() {
         initComponents();
-        makeButtonTransparent(bttndashboard);
          customizeTable();
+        makeButtonTransparent(bttndashboard);
+        makeButtonTransparent(btn_restok);
+        makeButtonTransparent(btn_karyawan);
+        makeButtonTransparent(btn_logout);
+        makeButtonTransparent(btn_laporan);
+        makeButtonTransparent(btn_batalkan);
+        makeButtonTransparent(btn_bayar);
+        makeButtonTransparent(btn_cetak);
+        makeButtonTransparent(btn_simpan);
         qty.setOpaque(false);
         qty.setBackground(new Color(0, 0, 0, 0));
         No_nota.setOpaque(false);
@@ -37,6 +45,12 @@ public class transaksi extends javax.swing.JFrame {
         hargastuan.setBackground(new Color(0, 0, 0, 0));
         totalharga.setOpaque(false);
         totalharga.setBackground(new Color(0, 0, 0, 0));
+        bayar.setOpaque(false);
+        bayar.setBackground(new Color(0, 0, 0, 0));
+        kembalian.setOpaque(false);
+        kembalian.setBackground(new Color(0, 0, 0, 0));
+        Kategori.setOpaque(false);
+        Kategori.setBackground(new Color(0, 0, 0, 0));
         
         
         No_nota.setText(generateNota());
@@ -84,6 +98,15 @@ public class transaksi extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btn_logout = new javax.swing.JButton();
+        btn_karyawan = new javax.swing.JButton();
+        btn_laporan = new javax.swing.JButton();
+        btn_cetak = new javax.swing.JButton();
+        btn_bayar = new javax.swing.JButton();
+        btn_batalkan = new javax.swing.JButton();
+        btn_restok = new javax.swing.JButton();
+        kembalian = new javax.swing.JTextField();
+        bayar = new javax.swing.JTextField();
         bttndashboard = new javax.swing.JButton();
         namabrg = new javax.swing.JTextField();
         NoBarang = new javax.swing.JTextField();
@@ -94,17 +117,67 @@ public class transaksi extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         qty = new javax.swing.JTextField();
         Kategori = new javax.swing.JTextField();
+        btn_simpan = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 160, 30));
+
+        btn_karyawan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_karyawanActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 160, 30));
+
+        btn_laporan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_laporanActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_laporan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 160, 30));
+        getContentPane().add(btn_cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 630, 230, 40));
+        getContentPane().add(btn_bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 560, 230, 40));
+        getContentPane().add(btn_batalkan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 180, 230, 40));
+
+        btn_restok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_restokActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_restok, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 160, 30));
+
+        kembalian.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        kembalian.setBorder(null);
+        kembalian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kembalianActionPerformed(evt);
+            }
+        });
+        getContentPane().add(kembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 630, 200, 50));
+
+        bayar.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        bayar.setBorder(null);
+        bayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bayarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 630, 200, 50));
 
         bttndashboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttndashboardActionPerformed(evt);
             }
         });
-        getContentPane().add(bttndashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 160, 30));
+        getContentPane().add(bttndashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 180, 30));
 
         namabrg.setBorder(null);
         namabrg.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +185,7 @@ public class transaksi extends javax.swing.JFrame {
                 namabrgActionPerformed(evt);
             }
         });
-        getContentPane().add(namabrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, 200, 30));
+        getContentPane().add(namabrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, 200, 30));
 
         NoBarang.setBorder(null);
         NoBarang.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +209,7 @@ public class transaksi extends javax.swing.JFrame {
                 hargastuanActionPerformed(evt);
             }
         });
-        getContentPane().add(hargastuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 180, 200, 30));
+        getContentPane().add(hargastuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 190, 200, 30));
 
         totalharga.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         totalharga.setBorder(null);
@@ -174,7 +247,7 @@ public class transaksi extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 770, 280));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 760, 270));
 
         qty.setBorder(null);
         qty.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +255,7 @@ public class transaksi extends javax.swing.JFrame {
                 qtyActionPerformed(evt);
             }
         });
-        getContentPane().add(qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 190, 30));
+        getContentPane().add(qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 190, 30));
 
         Kategori.setBorder(null);
         Kategori.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +263,8 @@ public class transaksi extends javax.swing.JFrame {
                 KategoriActionPerformed(evt);
             }
         });
-        getContentPane().add(Kategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 230, 200, 30));
+        getContentPane().add(Kategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 240, 200, 30));
+        getContentPane().add(btn_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 107, 230, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Transaksi.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -230,6 +304,30 @@ public class transaksi extends javax.swing.JFrame {
     private void KategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KategoriActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_KategoriActionPerformed
+
+    private void bayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bayarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bayarActionPerformed
+
+    private void kembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembalianActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kembalianActionPerformed
+
+    private void btn_laporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_laporanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_laporanActionPerformed
+
+    private void btn_restokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_restokActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_restokActionPerformed
+
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_logoutActionPerformed
+
+    private void btn_karyawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_karyawanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_karyawanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,11 +371,21 @@ public class transaksi extends javax.swing.JFrame {
     private javax.swing.JTextField Kategori;
     private javax.swing.JTextField NoBarang;
     private javax.swing.JTextField No_nota;
+    private javax.swing.JTextField bayar;
+    private javax.swing.JButton btn_batalkan;
+    private javax.swing.JButton btn_bayar;
+    private javax.swing.JButton btn_cetak;
+    private javax.swing.JButton btn_karyawan;
+    private javax.swing.JButton btn_laporan;
+    private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_restok;
+    private javax.swing.JButton btn_simpan;
     private javax.swing.JButton bttndashboard;
     private javax.swing.JTextField hargastuan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField kembalian;
     private javax.swing.JTextField namabrg;
     private javax.swing.JTextField qty;
     private javax.swing.JTextField totalharga;
