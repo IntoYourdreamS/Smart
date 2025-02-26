@@ -29,8 +29,6 @@ public class transaksi extends javax.swing.JFrame {
         qty.setBackground(new Color(0, 0, 0, 0));
         No_nota.setOpaque(false);
         No_nota.setBackground(new Color(0, 0, 0, 0));
-        stokbrg.setOpaque(false);
-        stokbrg.setBackground(new Color(0, 0, 0, 0));
         namabrg.setOpaque(false);
         namabrg.setBackground(new Color(0, 0, 0, 0));
         NoBarang.setOpaque(false);
@@ -40,7 +38,6 @@ public class transaksi extends javax.swing.JFrame {
         totalharga.setOpaque(false);
         totalharga.setBackground(new Color(0, 0, 0, 0));
         
-        jDateChooser1.setDate(new java.util.Date());
         
         No_nota.setText(generateNota());
     }
@@ -88,7 +85,6 @@ public class transaksi extends javax.swing.JFrame {
     private void initComponents() {
 
         bttndashboard = new javax.swing.JButton();
-        stokbrg = new javax.swing.JTextField();
         namabrg = new javax.swing.JTextField();
         NoBarang = new javax.swing.JTextField();
         No_nota = new javax.swing.JTextField();
@@ -97,7 +93,7 @@ public class transaksi extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         qty = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        Kategori = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,16 +104,7 @@ public class transaksi extends javax.swing.JFrame {
                 bttndashboardActionPerformed(evt);
             }
         });
-        getContentPane().add(bttndashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 160, 30));
-
-        stokbrg.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        stokbrg.setBorder(null);
-        stokbrg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stokbrgActionPerformed(evt);
-            }
-        });
-        getContentPane().add(stokbrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 236, 190, 30));
+        getContentPane().add(bttndashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 160, 30));
 
         namabrg.setBorder(null);
         namabrg.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +136,7 @@ public class transaksi extends javax.swing.JFrame {
                 hargastuanActionPerformed(evt);
             }
         });
-        getContentPane().add(hargastuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 226, 200, 30));
+        getContentPane().add(hargastuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 180, 200, 30));
 
         totalharga.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         totalharga.setBorder(null);
@@ -158,7 +145,7 @@ public class transaksi extends javax.swing.JFrame {
                 totalhargaActionPerformed(evt);
             }
         });
-        getContentPane().add(totalharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 280, 200, 50));
+        getContentPane().add(totalharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 630, 200, 50));
 
         jTable1.setForeground(new java.awt.Color(51, 51, 51));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -187,7 +174,7 @@ public class transaksi extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, 770, 210));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 770, 280));
 
         qty.setBorder(null);
         qty.addActionListener(new java.awt.event.ActionListener() {
@@ -195,19 +182,22 @@ public class transaksi extends javax.swing.JFrame {
                 qtyActionPerformed(evt);
             }
         });
-        getContentPane().add(qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 190, 30));
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 180, 190, 30));
+        getContentPane().add(qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 190, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Transaksi (2).png"))); // NOI18N
+        Kategori.setBorder(null);
+        Kategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KategoriActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Kategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 230, 200, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Transaksi.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void qtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qtyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_qtyActionPerformed
 
     private void No_notaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_No_notaActionPerformed
         // TODO add your handling code here:
@@ -221,21 +211,25 @@ public class transaksi extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_namabrgActionPerformed
 
-    private void stokbrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stokbrgActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_stokbrgActionPerformed
-
     private void hargastuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hargastuanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_hargastuanActionPerformed
+
+    private void bttndashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttndashboardActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bttndashboardActionPerformed
 
     private void totalhargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalhargaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_totalhargaActionPerformed
 
-    private void bttndashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttndashboardActionPerformed
+    private void qtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qtyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bttndashboardActionPerformed
+    }//GEN-LAST:event_qtyActionPerformed
+
+    private void KategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KategoriActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KategoriActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,17 +270,16 @@ public class transaksi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Kategori;
     private javax.swing.JTextField NoBarang;
     private javax.swing.JTextField No_nota;
     private javax.swing.JButton bttndashboard;
     private javax.swing.JTextField hargastuan;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField namabrg;
     private javax.swing.JTextField qty;
-    private javax.swing.JTextField stokbrg;
     private javax.swing.JTextField totalharga;
     // End of variables declaration//GEN-END:variables
 }
