@@ -75,13 +75,13 @@ public class ubahkaryawan extends javax.swing.JFrame {
 
         ubah = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
+        no_karyawan = new javax.swing.JTextField();
         nama_karyawan = new javax.swing.JTextField();
         no_telp = new javax.swing.JTextField();
         password = new javax.swing.JTextField();
-        no_karyawan = new javax.swing.JTextField();
         role = new javax.swing.JComboBox<>();
         RFID = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -92,50 +92,51 @@ public class ubahkaryawan extends javax.swing.JFrame {
                 ubahActionPerformed(evt);
             }
         });
-        getContentPane().add(ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 560, 190, 30));
+        getContentPane().add(ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, 190, 30));
 
         kembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kembaliActionPerformed(evt);
             }
         });
-        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 560, 200, 30));
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 20, 50, 30));
 
-        nama_karyawan.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        nama_karyawan.setBorder(null);
-        getContentPane().add(nama_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 390, 40));
-
-        no_telp.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        no_telp.setBorder(null);
-        getContentPane().add(no_telp, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, 390, 40));
-
-        password.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        password.setBorder(null);
-        password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordActionPerformed(evt);
-            }
-        });
-        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 400, 40));
-
-        no_karyawan.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        no_karyawan.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         no_karyawan.setBorder(null);
         no_karyawan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 no_karyawanActionPerformed(evt);
             }
         });
-        getContentPane().add(no_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 390, 40));
+        getContentPane().add(no_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, 320, 30));
+
+        nama_karyawan.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        nama_karyawan.setBorder(null);
+        getContentPane().add(nama_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 390, 40));
+
+        no_telp.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        no_telp.setBorder(null);
+        getContentPane().add(no_telp, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 390, 40));
+
+        password.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        password.setBorder(null);
+        password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordActionPerformed(evt);
+            }
+        });
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 400, 30));
 
         role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "owner", "kasir", " " }));
-        getContentPane().add(role, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, 410, 40));
+        getContentPane().add(role, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 320, 30));
 
         RFID.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         RFID.setBorder(null);
-        getContentPane().add(RFID, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 470, 400, 40));
+        getContentPane().add(RFID, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 400, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ubah karyawan (2).png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ubah KARYAWAN V2.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -187,10 +188,6 @@ try {
         this.setVisible(false); 
     }//GEN-LAST:event_kembaliActionPerformed
 
-    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordActionPerformed
-
     private void no_karyawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_no_karyawanActionPerformed
         // TODO add your handling code here:
   String noKaryawan = no_karyawan.getText();
@@ -233,6 +230,10 @@ try {
 
     }//GEN-LAST:event_no_karyawanActionPerformed
 
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -271,7 +272,7 @@ try {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField RFID;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton kembali;
     private javax.swing.JTextField nama_karyawan;
     private javax.swing.JTextField no_karyawan;

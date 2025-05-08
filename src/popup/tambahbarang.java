@@ -4,11 +4,19 @@
  */
 package popup;
 
+import Config.koneksi;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import smart.karyawan;
 import smart.restok;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -52,19 +60,290 @@ public class tambahbarang extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        id_barang = new javax.swing.JTextField();
+        nama_barang = new javax.swing.JTextField();
+        harga_jual = new javax.swing.JTextField();
+        harga_beli = new javax.swing.JTextField();
+        jumlah = new javax.swing.JTextField();
+        kategori = new javax.swing.JTextField();
+        id_supplier = new javax.swing.JTextField();
+        tambah = new javax.swing.JButton();
+        ubah = new javax.swing.JButton();
+        hapus = new javax.swing.JButton();
+        barcode = new javax.swing.JTextField();
+        tgl_exp = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tambah Barang v2.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
+        id_barang.setFont(new java.awt.Font("Futura Md BT", 1, 12)); // NOI18N
+        id_barang.setForeground(new java.awt.Color(116, 77, 6));
+        id_barang.setBorder(null);
+        id_barang.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        id_barang.setEnabled(false);
+        id_barang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                id_barangActionPerformed(evt);
+            }
+        });
+        getContentPane().add(id_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 170, 30));
+
+        nama_barang.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        nama_barang.setBorder(null);
+        getContentPane().add(nama_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 170, 30));
+
+        harga_jual.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        harga_jual.setBorder(null);
+        harga_jual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                harga_jualActionPerformed(evt);
+            }
+        });
+        getContentPane().add(harga_jual, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 160, 260, 30));
+
+        harga_beli.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        harga_beli.setBorder(null);
+        getContentPane().add(harga_beli, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 180, 30));
+
+        jumlah.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        jumlah.setBorder(null);
+        jumlah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jumlahActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 200, 260, 40));
+
+        kategori.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        kategori.setBorder(null);
+        kategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kategoriActionPerformed(evt);
+            }
+        });
+        getContentPane().add(kategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 170, 30));
+
+        id_supplier.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        id_supplier.setBorder(null);
+        getContentPane().add(id_supplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 250, 260, 40));
+
+        tambah.setBorder(null);
+        tambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahActionPerformed(evt);
+            }
+        });
+        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 160, 40));
+
+        ubah.setBorder(null);
+        ubah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ubahActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 390, 160, 40));
+
+        hapus.setBorder(null);
+        hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusActionPerformed(evt);
+            }
+        });
+        getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, 160, 40));
+
+        barcode.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        barcode.setBorder(null);
+        getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 170, 40));
+
+        tgl_exp.setBackground(new java.awt.Color(164, 107, 9));
+        tgl_exp.setForeground(new java.awt.Color(116, 77, 6));
+        tgl_exp.setFont(new java.awt.Font("Futura Md BT", 0, 16)); // NOI18N
+        getContentPane().add(tgl_exp, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 170, 20));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tambah Barang (2).png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+private String generateCode() {
+    String prefix = "PR";
+    String query = "SELECT id_produk FROM produk ORDER BY id_produk DESC LIMIT 1";
+    String newCode = "";
+
+    try (Connection conn = koneksi.getConnection();
+         Statement stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(query)) {
+
+        if (rs.next()) {
+            String lastId = rs.getString("id_produk"); // Contoh: "SP005"
+            int number = Integer.parseInt(lastId.substring(2)); // Ambil "005" lalu ubah ke int
+            number++; // Tambah 1
+            newCode = prefix + String.format("%03d", number); // Format jadi "SP006"
+        } else {
+            newCode = prefix + "001"; // Jika belum ada data, mulai dari SP001
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Gagal membuat ID supplier baru: " + e.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+    }
+
+    return newCode;
+}
+    private void harga_jualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_harga_jualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_harga_jualActionPerformed
+
+    private void jumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumlahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jumlahActionPerformed
+
+    private void kategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategoriActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kategoriActionPerformed
+
+    private void id_barangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_barangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_id_barangActionPerformed
+
+    private void tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahActionPerformed
+        // TODO add your handling code here:
+    String namaBarang     = nama_barang.getText();
+String Hargajual      = harga_jual.getText();
+String Hargabeli      = harga_beli.getText();
+String Jumlah         = jumlah.getText();
+String Kategori       = kategori.getText();
+String Nosupplier     = id_supplier.getText();
+String barcodeManual  = barcode.getText();
+String kode           = generateCode();
+SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd");
+
+// 1) Validasi input
+if (namaBarang.isEmpty() || Hargajual.isEmpty() || Hargabeli.isEmpty() ||
+    Jumlah.isEmpty() || Kategori.isEmpty() || Nosupplier.isEmpty() ||
+    barcodeManual.isEmpty() || tgl_exp.getDate() == null) {
+    JOptionPane.showMessageDialog(this,
+        "Semua field harus diisi!",
+        "Peringatan",
+        JOptionPane.WARNING_MESSAGE);
+    return;
+}
+
+// 2) Konfirmasi user
+int confirm = JOptionPane.showConfirmDialog(this,
+    "Apakah Anda yakin ingin menambah data?",
+    "Konfirmasi",
+    JOptionPane.YES_NO_OPTION);
+if (confirm != JOptionPane.YES_OPTION) return;
+
+// 3) Siapkan query
+String checkSupplier =
+    "SELECT COUNT(*) FROM supplier WHERE id_supplier = ?";
+String queryProduk =
+    "INSERT INTO produk " +
+    "  (id_produk, nama_produk, harga, stok, barcode, kategori, tanggal_exp, id_supplier) " +
+    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+String queryDetailPembelian =
+    "INSERT INTO detail_pembelian (harga_beli) VALUES (?)";
+
+try (Connection conn = koneksi.getConnection()) {
+    conn.setAutoCommit(false);
+
+    // 3a) Cek supplier
+    try (PreparedStatement statCheck = conn.prepareStatement(checkSupplier)) {
+        statCheck.setString(1, Nosupplier);
+        ResultSet rs = statCheck.executeQuery();
+        rs.next();
+        if (rs.getInt(1) == 0) {
+            JOptionPane.showMessageDialog(this,
+                "ID Supplier \"" + Nosupplier + "\" tidak ditemukan!",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }
+
+    // 3b) Insert ke produk
+    try (PreparedStatement statProduk = conn.prepareStatement(queryProduk)) {
+        statProduk.setString(1, kode);
+        statProduk.setString(2, namaBarang);
+        statProduk.setString(3, Hargajual);
+        statProduk.setString(4, Jumlah);
+        statProduk.setString(5, barcodeManual);
+        statProduk.setString(6, Kategori);
+        statProduk.setString(7, sdf.format(tgl_exp.getDate()));
+        statProduk.setString(8, Nosupplier);
+        statProduk.executeUpdate();
+    }
+
+    // 3c) Insert ke detail_pembelian
+    try (PreparedStatement statDetail = conn.prepareStatement(queryDetailPembelian)) {
+        statDetail.setString(1, Hargabeli);
+        statDetail.executeUpdate();
+    }
+
+    conn.commit();
+    new notifberhasilkrw().setVisible(true);
+
+} catch (SQLException e) {
+    e.printStackTrace();
+    JOptionPane.showMessageDialog(this,
+        "Terjadi kesalahan saat menyimpan data: " + e.getMessage(),
+        "Error",
+        JOptionPane.ERROR_MESSAGE);
+   
+}
+
+
+    }//GEN-LAST:event_tambahActionPerformed
+
+    private void ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahActionPerformed
+    
+    }//GEN-LAST:event_ubahActionPerformed
+
+    private void hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusActionPerformed
+        // TODO add your handling code here:
+        String idSupplier = id_supplier.getText();
+
+        // Validasi input
+        if (idSupplier.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "ID Supplier harus diisi!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Konfirmasi penghapusan
+        int confirm = JOptionPane.showConfirmDialog(this,
+            "Apakah Anda yakin ingin menghapus data supplier ini?",
+            "Konfirmasi Hapus",
+            JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            String query = "DELETE FROM supplier WHERE id_supplier = ?";
+
+            try (Connection conn = koneksi.getConnection();
+                PreparedStatement stat = conn.prepareStatement(query)) {
+
+                stat.setString(1, idSupplier);
+
+                int deletedRows = stat.executeUpdate();
+
+                if (deletedRows > 0) {
+                    JOptionPane.showMessageDialog(this, "Data berhasil dihapus!", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Data supplier tidak ditemukan atau gagal dihapus.", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Kesalahan saat menghapus data: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_hapusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,6 +384,18 @@ public class tambahbarang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField barcode;
+    private javax.swing.JButton hapus;
+    private javax.swing.JTextField harga_beli;
+    private javax.swing.JTextField harga_jual;
+    private javax.swing.JTextField id_barang;
+    private javax.swing.JTextField id_supplier;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField jumlah;
+    private javax.swing.JTextField kategori;
+    private javax.swing.JTextField nama_barang;
+    private javax.swing.JButton tambah;
+    private com.toedter.calendar.JDateChooser tgl_exp;
+    private javax.swing.JButton ubah;
     // End of variables declaration//GEN-END:variables
 }

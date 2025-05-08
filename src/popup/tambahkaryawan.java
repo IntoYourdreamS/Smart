@@ -5,65 +5,120 @@
 package popup;
 
 import Config.koneksi;
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import smart.karyawan;
-import smart.restok;
 
-/**
- *
- * @author ASUS
- */
 public class tambahkaryawan extends javax.swing.JFrame {
 
-    /**
-     * Creates new form coba
-     */
     public tambahkaryawan() {
         initComponents();
-        id_karyawan.setOpaque(false);
-        id_karyawan.setBackground(new Color(0, 0, 0, 0));
-        nama_karyawan.setOpaque(false);
-        nama_karyawan.setBackground(new Color(0, 0, 0, 0));
-         no_telp.setOpaque(false);
-        no_telp.setBackground(new Color(0, 0, 0, 0));
-        password.setOpaque(false);
-        password.setBackground(new Color(0, 0, 0, 0));
-          RFID.setOpaque(false);
-        RFID.setBackground(new Color(0, 0, 0, 0));
-        makeButtonTransparent(exit);
-          
-            makeButtonTransparent(tambah);
-           
-            
+        generateEmployeeID();
+        nokaryawan.setEditable(false); // Membuat field ID tidak bisa diedit
+        role.removeItem(" "); // Hapus item kosong dari combo box
+    }
 
+    private void generateEmployeeID() {
+        try (Connection conn = koneksi.getConnection(); 
+             Statement stmt = conn.createStatement()) {
+            
+            String query = "SELECT id_karyawan FROM karyawan ORDER BY id_karyawan DESC LIMIT 1";
+            ResultSet rs = stmt.executeQuery(query);
+            
+            if (rs.next()) {
+                String lastID = rs.getString("id_karyawan");
+                int num = Integer.parseInt(lastID.substring(2)) + 1;
+                String newID = String.format("KR%03d", num);
+                nokaryawan.setText(newID);
+            } else {
+                nokaryawan.setText("KR001");
+            }
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, 
+                    "Gagal generate ID karyawan: " + e.getMessage(),
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            nokaryawan.setText("KR001");
+        }
     }
     
-     private void makeButtonTransparent(JButton button) {
-        button.setOpaque(false);
-        button.setContentAreaFilled(false);
-        button.setBorderPainted(false);
+    private void simpanDataKaryawan() {
+        // Ambil nilai dari form
+        String id = nokaryawan.getText().trim();
+        String nama = namakaryawan.getText().trim();
+        String noHP = nohp.getText().trim();
+        String passwordText = new String(password.getPassword());
+        String roleText = role.getSelectedItem().toString();
+        String rfidText = rfid.getText().trim();
+        
+        // Validasi input
+        if (nama.isEmpty() || noHP.isEmpty() || passwordText.isEmpty() || rfidText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                    "Semua kolom harus diisi!", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try {
+            // Validasi nomor HP harus angka
+            int noTelp = Integer.parseInt(noHP);
+            
+            // Query insert
+            String query = "INSERT INTO karyawan (id_karyawan, nama_karyawan, no_telp, password, role, RFID) " +
+                          "VALUES (?, ?, ?, ?, ?, ?)";
+            
+            Connection konek = koneksi.getConnection();
+            PreparedStatement pst = konek.prepareStatement(query);
+            
+            // Set parameter dengan variabel yang benar
+            pst.setString(1, id);
+            pst.setString(2, nama);
+            pst.setInt(3, noTelp);
+            pst.setString(4, passwordText);
+            pst.setString(5, roleText);
+            pst.setString(6, rfidText);
+            
+            // Eksekusi query
+            int hasil = pst.executeUpdate();
+            
+            if (hasil > 0) {
+                JOptionPane.showMessageDialog(this, 
+                        "Data karyawan berhasil disimpan!", 
+                        "Sukses", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                
+                this.dispose();
+                
+                // Refresh tabel karyawan di form utama
+                karyawan formKaryawan = new karyawan();
+                formKaryawan.loadDataToTable();
+                
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                        "Gagal menyimpan data karyawan.", 
+                        "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            
+            konek.close();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, 
+                    "Nomor HP harus berupa angka!", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, 
+                    "Error: " + e.getMessage(), 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
-     
-     
-    
-    
-    
-    class Coba extends JFrame {
-    public Coba() {
-        setTitle("Popup Frame - Coba");
-        setSize(200, 150);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-    }
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,189 +129,90 @@ public class tambahkaryawan extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        nokaryawan = new javax.swing.JTextField();
+        namakaryawan = new javax.swing.JTextField();
+        nohp = new javax.swing.JTextField();
+        rfid = new javax.swing.JTextField();
         tambah = new javax.swing.JButton();
-        nama_karyawan = new javax.swing.JTextField();
-        no_telp = new javax.swing.JTextField();
-        password = new javax.swing.JTextField();
-        RFID = new javax.swing.JTextField();
+        password = new javax.swing.JPasswordField();
         role = new javax.swing.JComboBox<>();
-        id_karyawan = new javax.swing.JTextField();
-        exit = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setIconImages(null);
-        setUndecorated(true);
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentHidden(java.awt.event.ComponentEvent evt) {
-                formComponentHidden(evt);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        nokaryawan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nokaryawanActionPerformed(evt);
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(nokaryawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 300, -1));
+
+        namakaryawan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                namakaryawanActionPerformed(evt);
+            }
+        });
+        getContentPane().add(namakaryawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 300, -1));
+
+        nohp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nohpActionPerformed(evt);
+            }
+        });
+        getContentPane().add(nohp, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 310, -1));
+
+        rfid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rfidActionPerformed(evt);
+            }
+        });
+        getContentPane().add(rfid, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 290, -1));
 
         tambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tambahActionPerformed(evt);
             }
         });
-        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, 190, 40));
+        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 393, 170, 30));
 
-        nama_karyawan.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        nama_karyawan.setBorder(null);
-        getContentPane().add(nama_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 320, -1));
+        password.setText("jPasswordField1");
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 300, -1));
 
-        no_telp.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        no_telp.setBorder(null);
-        getContentPane().add(no_telp, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 185, 320, -1));
+        role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Owner", "Karyawan", " " }));
+        getContentPane().add(role, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, 280, -1));
 
-        password.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        password.setBorder(null);
-        password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordActionPerformed(evt);
-            }
-        });
-        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 320, 30));
-
-        RFID.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        RFID.setBorder(null);
-        getContentPane().add(RFID, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 320, 30));
-
-        role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "owner", "kasir", " " }));
-        getContentPane().add(role, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 320, 30));
-
-        id_karyawan.setFont(new java.awt.Font("Futura Md BT", 1, 12)); // NOI18N
-        id_karyawan.setForeground(new java.awt.Color(116, 77, 6));
-        id_karyawan.setBorder(null);
-        id_karyawan.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        id_karyawan.setEnabled(false);
-        id_karyawan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                id_karyawanActionPerformed(evt);
-            }
-        });
-        getContentPane().add(id_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 320, 30));
-
-        exit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitActionPerformed(evt);
-            }
-        });
-        getContentPane().add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(755, 23, 40, 40));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/TAMBAH KARYAWAN V2.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/TAMBAH KARYAWAN V2.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 450));
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
- private String generateCode() {
-        String kodeMenu = "KR001";
-        try (Connection conn = koneksi.getConnection()) {
-            if (conn != null) {
-                try {
-//                Statement st = conn.createStatement();
-                    Statement statem = conn.createStatement();
-                    String query = "SELECT id_karyawan FROM karyawan ORDER BY id_karyawan DESC LIMIT 1";
-                    ResultSet resultSet = statem.executeQuery(query);
 
-                    if (resultSet.next()) {
-                        String lastKode = resultSet.getString("id_karyawan");
-                        int kodeNum = Integer.parseInt(lastKode.substring(2)) + 1;
-                        kodeMenu = String.format("KR%03d", kodeNum);
-                    }
+    private void nokaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nokaryawanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nokaryawanActionPerformed
 
-                    resultSet.close();
-                    statem.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }catch(SQLException e){
-            e.printStackTrace();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+    private void namakaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namakaryawanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_namakaryawanActionPerformed
 
-        return kodeMenu;
-    }
+    private void nohpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nohpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nohpActionPerformed
+
+    private void rfidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rfidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rfidActionPerformed
 
     private void tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahActionPerformed
         // TODO add your handling code here:
-         String namaKaryawan = nama_karyawan.getText(); // Misal nama adalah JTexField untuk nama karyawan
-        String alamatKaryawan = no_telp.getText(); // Misal alamat adalah JTexField untuk alamat
-        String noTelp = no_telp.getText(); // Misal notelp adalah JTexField untuk no telepon
-        String Password = password.getText();
-        String selectedRole = role.getSelectedItem().toString();
-        String Rfid = RFID.getText();
-        String kode = generateCode();
-        // Periksa apakah semua field sudah diisi
-        if (namaKaryawan.isEmpty() || alamatKaryawan.isEmpty() || noTelp.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Semua field harus diisi!", "Peringatan", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        // Konfirmasi penambahan
-        int confirm = JOptionPane.showConfirmDialog(this,
-                "Apakah Anda yakin ingin menambah data?",
-                "Konfirmasi",
-                JOptionPane.YES_NO_OPTION);
-
-        // Query untuk menambahkan data ke tabel karyawan
-        String query = "INSERT INTO karyawan (id_karyawan, nama_karyawan, no_telp, password, role, RFID,tanggal_masuk) VALUES (?, ?, ?, ?, ?,?, NOW())";
-
-        // Menambahkan data ke database
-        try (Connection conn = koneksi.getConnection(); PreparedStatement stat = conn.prepareStatement(query)) {
-            // Set nilai parameter
-            stat.setString(1, kode);
-            stat.setString(2, namaKaryawan);
-           
-            stat.setString(3, noTelp);
-            stat.setString(4, Password);
-            stat.setString(5, selectedRole);
-             stat.setString(6, Rfid);
-
-            // Eksekusi query
-            int rowsAffected = stat.executeUpdate();
-
-            // Periksa apakah data berhasil ditambahkan
-            if (rowsAffected > 0) {
-               notifberhasilkrw popup = new notifberhasilkrw();
-              popup.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(this, "Gagal menambahkan data.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (SQLException e) {
-            // Menangani kesalahan
-            JOptionPane.showMessageDialog(this, "Terjadi kesalahan: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace(); // Menampilkan detail kesalahan di konsol (untuk debug)
-        }
-
+        simpanDataKaryawan();
     }//GEN-LAST:event_tambahActionPerformed
-
-    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordActionPerformed
-
-    private void id_karyawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_karyawanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_id_karyawanActionPerformed
-
-    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formComponentHidden
-
-    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    new karyawan().setVisible(true);
-    }//GEN-LAST:event_exitActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -289,13 +245,12 @@ public class tambahkaryawan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField RFID;
-    private javax.swing.JButton exit;
-    private javax.swing.JTextField id_karyawan;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField nama_karyawan;
-    private javax.swing.JTextField no_telp;
-    private javax.swing.JTextField password;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField namakaryawan;
+    private javax.swing.JTextField nohp;
+    private javax.swing.JTextField nokaryawan;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JTextField rfid;
     private javax.swing.JComboBox<String> role;
     private javax.swing.JButton tambah;
     // End of variables declaration//GEN-END:variables

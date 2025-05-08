@@ -6,10 +6,20 @@ package popup;
 
 import javax.swing.JButton;
 import smart.*;
+import Config.koneksi;
+import static com.mysql.cj.protocol.x.XProtocolDecoder.instance;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author acer
+ * @author Muhammad Shobri
  */
 public class datareturn extends javax.swing.JFrame {
 
@@ -18,7 +28,7 @@ public class datareturn extends javax.swing.JFrame {
      */
     public datareturn() {
         initComponents();
-            
+            loadDataToTable(); 
              makeButtonTransparent(jButton1);
     }
     
@@ -28,6 +38,50 @@ public class datareturn extends javax.swing.JFrame {
         button.setBorderPainted(false);
     }
     
+//     public static datareturn getInstance() {
+//        if (instance == null) {
+//            instance = new datareturn();
+//        }
+//        return instance;
+//    }
+    
+    void loadDataToTable() {
+    DefaultTableModel model = (DefaultTableModel) tbdatareturn.getModel();
+    model.setRowCount(0); // Bersihkan data lama
+    
+    String query = "SELECT "
+        + "dp.id_produk AS id_barang, "
+        + "rp.id_penjualan AS id_pembelian, "
+        + "p.nama_produk, "
+        + "dp.harga_satuan AS harga_jual, "
+        + "p.id_supplier, "
+        + "rp.alasan "
+        + "FROM retur_penjualan rp "
+        + "JOIN penjualan pj ON rp.id_penjualan = pj.id_penjualan "
+        + "JOIN detail_penjualan dp ON pj.id_penjualan = dp.id_penjualan "
+        + "JOIN produk p ON dp.id_produk = p.id_produk";
+
+    try (Connection conn = koneksi.getConnection();
+         Statement stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(query)) {
+        
+        while (rs.next()) {
+            model.addRow(new Object[]{
+                rs.getString("id_barang"),
+                rs.getString("id_pembelian"),
+                rs.getString("nama_produk"),
+                rs.getDouble("harga_jual"),
+                rs.getString("id_supplier"),
+                rs.getString("alasan")
+            });
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this,
+            "Error load data: " + e.getMessage(),
+            "Database Error",
+            JOptionPane.ERROR_MESSAGE);
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,11 +92,28 @@ public class datareturn extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbdatareturn = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tbdatareturn.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "id_barang", "id_pembelian", "nama_produk", "harga_jual", "id_supplier", "alasan"
+            }
+        ));
+        jScrollPane1.setViewportView(tbdatareturn);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 1100, -1));
 
         jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -53,7 +124,7 @@ public class datareturn extends javax.swing.JFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 660, 130, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Data return (1).png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1390, 740));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, -10, 1390, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -133,5 +204,7 @@ public class datareturn extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbdatareturn;
     // End of variables declaration//GEN-END:variables
 }
