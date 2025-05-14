@@ -169,7 +169,7 @@ private void connectToDatabase() {
                 dashboardActionPerformed(evt);
             }
         });
-        getContentPane().add(dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 140, 50));
+        getContentPane().add(dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 170, 50));
 
         transaksi.setBorder(null);
         transaksi.addActionListener(new java.awt.event.ActionListener() {
@@ -177,21 +177,21 @@ private void connectToDatabase() {
                 transaksiActionPerformed(evt);
             }
         });
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 130, 40));
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 160, 40));
 
         laporan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 laporanActionPerformed(evt);
             }
         });
-        getContentPane().add(laporan, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 130, 50));
+        getContentPane().add(laporan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 160, 40));
 
         karyawan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 karyawanActionPerformed(evt);
             }
         });
-        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 140, 40));
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 160, 30));
 
         suplier.setBorder(null);
         suplier.addActionListener(new java.awt.event.ActionListener() {
@@ -199,14 +199,14 @@ private void connectToDatabase() {
                 suplierActionPerformed(evt);
             }
         });
-        getContentPane().add(suplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 120, 30));
+        getContentPane().add(suplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 80, 60, 40));
 
         inputbarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputbarangActionPerformed(evt);
             }
         });
-        getContentPane().add(inputbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 90, 120, 30));
+        getContentPane().add(inputbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 80, 60, 40));
 
         inputreturn.setBorder(null);
         inputreturn.addActionListener(new java.awt.event.ActionListener() {
@@ -214,7 +214,7 @@ private void connectToDatabase() {
                 inputreturnActionPerformed(evt);
             }
         });
-        getContentPane().add(inputreturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 90, 120, 30));
+        getContentPane().add(inputreturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 80, 60, 40));
 
         datasupplier.setBorder(null);
         datasupplier.addActionListener(new java.awt.event.ActionListener() {
@@ -222,7 +222,7 @@ private void connectToDatabase() {
                 datasupplierActionPerformed(evt);
             }
         });
-        getContentPane().add(datasupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 210, 160, 30));
+        getContentPane().add(datasupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 200, 160, 40));
 
         dataexpired.setBorder(null);
         dataexpired.addActionListener(new java.awt.event.ActionListener() {
@@ -230,7 +230,7 @@ private void connectToDatabase() {
                 dataexpiredActionPerformed(evt);
             }
         });
-        getContentPane().add(dataexpired, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 420, 160, 30));
+        getContentPane().add(dataexpired, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 360, 160, 30));
 
         datareturn.setBorder(null);
         datareturn.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +238,7 @@ private void connectToDatabase() {
                 datareturnActionPerformed(evt);
             }
         });
-        getContentPane().add(datareturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 690, 130, 30));
+        getContentPane().add(datareturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 540, 130, 40));
 
         tablerestock.setForeground(new java.awt.Color(0, 0, 0));
         tablerestock.setModel(new javax.swing.table.DefaultTableModel(

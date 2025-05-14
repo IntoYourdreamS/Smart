@@ -146,7 +146,7 @@ public class returnbarang extends javax.swing.JFrame {
     
     // Buka form datareturn baru
     datareturn formReturn = new datareturn();
-    formReturn.loadDataToTable(); // Refresh data
+    formReturn.loadDataReturnToTable(); // Refresh data
     formReturn.setVisible(true);
 }
 

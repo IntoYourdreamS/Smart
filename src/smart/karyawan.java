@@ -81,7 +81,7 @@ public class karyawan extends javax.swing.JFrame {
     
    
 
-    private void loadDataToTable() {
+    public void loadDataToTable() {
         // Definisikan model tabel dengan header kolom sesuai dengan data karyawan
         DefaultTableModel model = new DefaultTableModel(
                 new Object[]{"No Karyawan", "Nama Karyawan", "No HP", "Password", "Role", "RFID"}, 0

@@ -28,7 +28,7 @@ public class datareturn extends javax.swing.JFrame {
      */
     public datareturn() {
         initComponents();
-            loadDataToTable(); 
+            loadDataReturnToTable();
              makeButtonTransparent(jButton1);
     }
     
@@ -45,43 +45,47 @@ public class datareturn extends javax.swing.JFrame {
 //        return instance;
 //    }
     
-    void loadDataToTable() {
-    DefaultTableModel model = (DefaultTableModel) tbdatareturn.getModel();
-    model.setRowCount(0); // Bersihkan data lama
-    
-    String query = "SELECT "
-        + "dp.id_produk AS id_barang, "
-        + "rp.id_penjualan AS id_pembelian, "
-        + "p.nama_produk, "
-        + "dp.harga_satuan AS harga_jual, "
-        + "p.id_supplier, "
-        + "rp.alasan "
-        + "FROM retur_penjualan rp "
-        + "JOIN penjualan pj ON rp.id_penjualan = pj.id_penjualan "
-        + "JOIN detail_penjualan dp ON pj.id_penjualan = dp.id_penjualan "
-        + "JOIN produk p ON dp.id_produk = p.id_produk";
+void loadDataReturnToTable() {
+    DefaultTableModel model = new DefaultTableModel(
+        new Object[]{"ID Barang", "Nama Produk", "Harga Jual", "ID Supplier", "Alasan", "Tanggal Return"}, 0
+    );
+    tbdatareturn.setModel(model);
 
-    try (Connection conn = koneksi.getConnection();
-         Statement stmt = conn.createStatement();
-         ResultSet rs = stmt.executeQuery(query)) {
-        
-        while (rs.next()) {
-            model.addRow(new Object[]{
-                rs.getString("id_barang"),
-                rs.getString("id_pembelian"),
-                rs.getString("nama_produk"),
-                rs.getDouble("harga_jual"),
-                rs.getString("id_supplier"),
-                rs.getString("alasan")
-            });
+    try (Connection conn = koneksi.getConnection(); Statement stmt = conn.createStatement()) {
+        String query = """
+            SELECT 
+                            dp.id_produk AS id_barang,
+                            p.nama_produk,
+                            dp.harga_satuan AS harga_jual,
+                            rp.alasan,
+                            rp.tanggal_retur
+                        FROM retur_penjualan rp
+                        JOIN detail_penjualan dp ON rp.id_penjualan = dp.id_penjualan
+                        JOIN produk p ON dp.id_produk = p.id_produk
+        """;
+
+        try (ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                String idBarang = rs.getString("id_barang");
+                String idPembelian = rs.getString("id_pembelian");
+                String namaProduk = rs.getString("nama_produk");
+                String hargaJual = rs.getString("harga_jual");
+                String idSupplier = rs.getString("id_supplier");
+                String alasan = rs.getString("alasan");
+                String tanggalReturn = rs.getString("tanggal_return");
+
+                model.addRow(new Object[]{idBarang, idPembelian, namaProduk, hargaJual, idSupplier, alasan, tanggalReturn});
+            }
         }
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(this,
-            "Error load data: " + e.getMessage(),
-            "Database Error",
-            JOptionPane.ERROR_MESSAGE);
+                "Gagal memuat data return: " + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
     }
 }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,12 +112,12 @@ public class datareturn extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "id_barang", "id_pembelian", "nama_produk", "harga_jual", "id_supplier", "alasan"
+                "id_barang", "nama_produk", "harga_jual", "id_supplier", "alasan", "tanggal return"
             }
         ));
         jScrollPane1.setViewportView(tbdatareturn);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 1100, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 1100, -1));
 
         jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {

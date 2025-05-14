@@ -71,6 +71,7 @@ public class tambahbarang extends javax.swing.JFrame {
         ubah = new javax.swing.JButton();
         hapus = new javax.swing.JButton();
         barcode = new javax.swing.JTextField();
+        kembali = new javax.swing.JButton();
         tgl_exp = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
 
@@ -156,6 +157,13 @@ public class tambahbarang extends javax.swing.JFrame {
         barcode.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         barcode.setBorder(null);
         getContentPane().add(barcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 170, 40));
+
+        kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kembaliActionPerformed(evt);
+            }
+        });
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 20, 50, 40));
 
         tgl_exp.setBackground(new java.awt.Color(164, 107, 9));
         tgl_exp.setForeground(new java.awt.Color(116, 77, 6));
@@ -345,6 +353,10 @@ try (Connection conn = koneksi.getConnection()) {
         }
     }//GEN-LAST:event_hapusActionPerformed
 
+    private void kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kembaliActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -393,6 +405,7 @@ try (Connection conn = koneksi.getConnection()) {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jumlah;
     private javax.swing.JTextField kategori;
+    private javax.swing.JButton kembali;
     private javax.swing.JTextField nama_barang;
     private javax.swing.JButton tambah;
     private com.toedter.calendar.JDateChooser tgl_exp;
