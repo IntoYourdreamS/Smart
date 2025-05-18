@@ -358,7 +358,7 @@ public class transaksi extends javax.swing.JFrame {
 
     private void txt_qtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_qtyActionPerformed
         // TODO add your handling code here:
-        btn_simpan.doClick();
+        
     }//GEN-LAST:event_txt_qtyActionPerformed
 
     private void prosesTransaksi(String kodeTransaksi, String idKaryawan, String[] idProduk, int[] jumlahProduk, String[] Kategori, int[] hargaS, int[] SubTotal, Double bayar, int total) throws SQLException {
@@ -442,7 +442,7 @@ public class transaksi extends javax.swing.JFrame {
                 txt_namabrg.setText(namaProduk);
                 txt_harga.setText(harga);
                 txt_kategori.setText(kategori);
-                txt_qty.requestFocus();
+                btn_simpan.doClick();
             } else {
                 JOptionPane.showMessageDialog(this, "Kode bahan tidak ditemukan", "Kesalahan", JOptionPane.ERROR_MESSAGE);
                 txt_namabrg.setText("");
