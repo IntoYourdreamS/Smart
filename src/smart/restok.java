@@ -170,7 +170,7 @@ private void connectToDatabase() {
                 dashboardActionPerformed(evt);
             }
         });
-        getContentPane().add(dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 140, 50));
+        getContentPane().add(dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 170, 50));
 
         transaksi.setBorder(null);
         transaksi.addActionListener(new java.awt.event.ActionListener() {
@@ -178,21 +178,21 @@ private void connectToDatabase() {
                 transaksiActionPerformed(evt);
             }
         });
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 130, 40));
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 160, 40));
 
         laporan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 laporanActionPerformed(evt);
             }
         });
-        getContentPane().add(laporan, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 130, 50));
+        getContentPane().add(laporan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 130, 50));
 
         karyawan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 karyawanActionPerformed(evt);
             }
         });
-        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 140, 40));
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 140, 40));
 
         suplier.setBorder(null);
         suplier.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +207,7 @@ private void connectToDatabase() {
                 inputbarangActionPerformed(evt);
             }
         });
-        getContentPane().add(inputbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 90, 120, 30));
+        getContentPane().add(inputbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 150, 30));
 
         inputreturn.setBorder(null);
         inputreturn.addActionListener(new java.awt.event.ActionListener() {
@@ -215,7 +215,7 @@ private void connectToDatabase() {
                 inputreturnActionPerformed(evt);
             }
         });
-        getContentPane().add(inputreturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 90, 120, 30));
+        getContentPane().add(inputreturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 90, 120, 30));
 
         datasupplier.setBorder(null);
         datasupplier.addActionListener(new java.awt.event.ActionListener() {
@@ -231,7 +231,7 @@ private void connectToDatabase() {
                 dataexpiredActionPerformed(evt);
             }
         });
-        getContentPane().add(dataexpired, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 360, 160, 30));
+        getContentPane().add(dataexpired, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 540, 160, 30));
 
         datareturn.setBorder(null);
         datareturn.addActionListener(new java.awt.event.ActionListener() {
@@ -239,7 +239,7 @@ private void connectToDatabase() {
                 datareturnActionPerformed(evt);
             }
         });
-        getContentPane().add(datareturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 540, 130, 30));
+        getContentPane().add(datareturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 360, 130, 30));
 
         tablerestock.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -256,7 +256,7 @@ private void connectToDatabase() {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 720, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Restock (2).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Restock_paling_terbaru.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1380, -1));
 
         pack();

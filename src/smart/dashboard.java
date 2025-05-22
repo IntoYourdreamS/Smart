@@ -448,7 +448,7 @@ private void initSalesChart() {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 170, 50));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 170, 50));
 
         bttnkaryawan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -462,7 +462,7 @@ private void initSalesChart() {
                 bttntransaksiActionPerformed(evt);
             }
         });
-        getContentPane().add(bttntransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 170, 50));
+        getContentPane().add(bttntransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 170, 50));
 
         bttnlaporan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

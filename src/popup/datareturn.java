@@ -6,6 +6,14 @@ package popup;
 
 import javax.swing.JButton;
 import smart.*;
+import Config.koneksi;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -18,8 +26,9 @@ public class datareturn extends javax.swing.JFrame {
      */
     public datareturn() {
         initComponents();
-            
-             makeButtonTransparent(jButton1);
+        makeButtonTransparent(kembali);
+        makeButtonTransparent(inputreturn);
+        loadData();
     }
     
     private void makeButtonTransparent(JButton button) {
@@ -28,6 +37,31 @@ public class datareturn extends javax.swing.JFrame {
         button.setBorderPainted(false);
     }
     
+    private void loadData() {
+    try {
+        Connection conn = koneksi.getConnection();
+        String query = "SELECT rp.id_retur_penjualan, rp.id_penjualan, rp.tanggal_retur, rp.alasan, dp.kategori " +
+                       "FROM retur_penjualan rp " +
+                       "JOIN detail_penjualan dp ON rp.id_penjualan = dp.id_penjualan";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+
+        DefaultTableModel model = (DefaultTableModel) tbldatareturn.getModel();
+        model.setRowCount(0); // Clear existing data
+
+        while (rs.next()) {
+            String id_retur_penjualan = rs.getString("id_retur_penjualan");
+            String id_penjualan = rs.getString("id_penjualan");
+            String tanggal_retur = rs.getString("tanggal_retur");
+            String alasan = rs.getString("alasan");
+            String kategori = rs.getString("kategori");
+
+            model.addRow(new Object[]{id_retur_penjualan, id_penjualan, tanggal_retur, alasan, kategori});
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,31 +72,64 @@ public class datareturn extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        inputreturn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbldatareturn = new javax.swing.JTable();
+        kembali = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        inputreturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                inputreturnActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 660, 130, 30));
+        getContentPane().add(inputreturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 650, 200, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Data return (1).png"))); // NOI18N
+        tbldatareturn.setBackground(new java.awt.Color(255, 255, 255));
+        tbldatareturn.setForeground(new java.awt.Color(255, 255, 255));
+        tbldatareturn.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "No", "Id Barang", "Nama", "Tanggal return", "Kategori", "Alasan"
+            }
+        ));
+        jScrollPane1.setViewportView(tbldatareturn);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 1100, 480));
+
+        kembali.setBorder(null);
+        kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kembaliActionPerformed(evt);
+            }
+        });
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 660, 150, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Data_return_paling_terbaru.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1390, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliActionPerformed
         // TODO add your handling code here:
          new restok().setVisible(true);
         this.setVisible(false);  
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_kembaliActionPerformed
+
+    private void inputreturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputreturnActionPerformed
+        // TODO add your handling code here:
+        inputreturn popup = new inputreturn();
+                popup.setVisible(true);  
+    }//GEN-LAST:event_inputreturnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,7 +198,10 @@ public class datareturn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton inputreturn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton kembali;
+    private javax.swing.JTable tbldatareturn;
     // End of variables declaration//GEN-END:variables
 }
